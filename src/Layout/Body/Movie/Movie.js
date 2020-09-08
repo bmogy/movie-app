@@ -1,7 +1,7 @@
 import React from "react";
 import "../../../Styles/Style.css"
 
-const Movie = (props) => {
+const Movie = (props,t) => {
     return (
         <div>
          
