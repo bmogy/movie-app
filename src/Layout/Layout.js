@@ -1,7 +1,12 @@
 import React, {Component} from "react";
 import Header from "./Header/Header"
 import Movie from "./Body/Movie/Movie"
-
+import TV from "./Body/TV/TV"
+import StarSearch from "./Body/StarSearch/StarSearch"
+import StarSearchFunction from "./Body/StarSearch/StarSearchFunction/StarSearchFunction"
+import RenderList from "./Body/Movie/MovieFunctions/MovieFunctions"
+import TVRenderList from "./Body/TV/TVFunctions/TVFunctions"
+import Footer from "./Footer/Footer"
 class Layout extends Component{
     // creatong the states
     state = {
@@ -10,53 +15,26 @@ class Layout extends Component{
     }
     // creating input hnadler function where it will pull from the movie dba apt anytime someone types something
     inputHandler =  (event) => {
-        //storing the event
-         let searchField = event.target.value
 
-        // storing the URL for searching movies
-       const movieSearch = "https://api.themoviedb.org/3/search/movie?api_key=" + this.state.apiKey + "&language=en-US&query=" + searchField +"&page=1&include_adult=false"
-        // creating my promise    
-       const promise = new Promise((resolve,reject)=>{
-            const catchData =  fetch(movieSearch)
-            resolve(catchData);
-       })
-       // converting the data to json data
-       promise.then((response)=>response.json())
-       //converting the data to a object
-       .then((data)=>{
-        // grabbed the div tag from the Movie.js
-        const movieDiv = document.getElementById("movieDiv");
-       // movieDiv.innerHTML=""
-       // create p tag for movie over view
-        const movieOverView =document.createElement("p")
-        movieOverView.innerHTML =""
-        // create p tag for movie title
-        const movieTilte = document.createElement("p")
-        movieTilte.innerHTML =""
-        // filter through the list of objects        
-            const filteredMovieData = data.results.filter((movie)=>{
-                console.log(movie.title)
-                    return movie.original_title=== searchField
-                
-            })
-            // printing off the list of objects
-            filteredMovieData.forEach((movie)=>{
-                movieTilte.innerHTML="<Strong>Title: </Strong>" + movie.title
-                movieOverView.innerHTML ="<Strong>Movie Overview: </Strong>" + movie.overview
-                movieDiv.appendChild(movieTilte)
-                movieDiv.appendChild(movieOverView)
-                console.log(movieTilte)
-                console.log(movieOverView)
-
-            })
-       })
+        RenderList(event, this.state.apiKey)
+    }
+    TVInputHandler= (event) => {
+ 
+        TVRenderList(event, this.state.apiKey)
+    }
+    startSearch = (event) => {
+        StarSearchFunction(event,this.state.apiKey)
     }
     render(){
-    
         return (
             <div>
             <Header></Header>
             <Movie inputHandler={this.inputHandler}></Movie>
+            <TV inputHandler={this.TVInputHandler}></TV>
+            <StarSearch inputHandler={this.startSearch}></StarSearch>
+            <Footer></Footer>
+
+        
             </div>
         )
     }

@@ -1,10 +1,10 @@
 import React from "react"
-import "./Header.css"
+import "../../Styles/Style.css"
 
 const Header = (props) => {
 return (
-    <div className ="mainHeader">
-
+    <div className ="header">
+        <p>Movie App</p>
     </div>
 )
 }

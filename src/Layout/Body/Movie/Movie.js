@@ -1,10 +1,11 @@
 import React from "react";
+import "../../../Styles/Style.css"
 
 const Movie = (props) => {
     return (
         <div>
-            <label htmlFor="movie">Movie:</label>
-            <input id="movie" type="text" placeholder="Please type a nmae of a movie" onChange={props.inputHandler}></input>
+         
+            <input id="movie" type="text" placeholder="Please type a name of a movie" onChange={props.inputHandler}></input>
              <div id="movieDiv"></div>
         </div>
     )
