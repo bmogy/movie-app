@@ -1,6 +1,5 @@
-import React, {Component,useState} from "react";
+import React, {Component} from "react";
 import "../../../Styles/Style.css"
-import { useState } from "react";
 const TV = (props) =>{
 return(
     <div>
